@@ -6,6 +6,7 @@ import hero5 from "../assets/interactive-questions.svg";
 import hero6 from "../assets/questions-bank.svg";
 import FeaturesSec from "../components/sections/FeaturesSec";
 import CoursesSec from "../components/sections/CoursesSec";
+import TeachersSec from "../components/sections/TeachersSec";
 
 const Home = () => {
   return (
@@ -56,6 +57,7 @@ const Home = () => {
       </div>
       <FeaturesSec />
       <CoursesSec />
+      <TeachersSec />
     </>
   );
 };

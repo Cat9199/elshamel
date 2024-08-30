@@ -1,6 +1,7 @@
 import { GoUpload } from "react-icons/go";
 import { useUserStore } from "../store/store";
 import { axiosInstance } from "../lib/axiosInstance";
+import { toast, Toaster } from "sonner";
 export default function ProfileImg() {
   const { user } = useUserStore((state) => state);
   const changePicHandler = async (e) => {
@@ -22,19 +23,23 @@ export default function ProfileImg() {
     }
 
     try {
-      const res = await axiosInstance.post("auth/profile/picture", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data", // Explicitly set content type
-        },
-      });
-      console.log("Server response:", res.data);
+      await axiosInstance
+        .post("auth/profile/picture", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data", // Explicitly set content type
+          },
+        })
+        .then(() => {
+          toast.success("تم تغيير الصورة بنجاح");
+        });
     } catch (error) {
-      console.error("Error uploading file:", error);
+      toast.error(error.response.data.message);
     }
   };
 
   return (
     <div className="w-28 h-28 rounded-full overflow-hidden m-auto my-4 relative group">
+      <Toaster position="bottom-right" richColors />
       <input
         onChange={(e) => changePicHandler(e)}
         type="file"

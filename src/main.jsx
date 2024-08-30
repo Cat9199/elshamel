@@ -10,6 +10,9 @@ import Signup from "./pages/Signup.jsx";
 import Course from "./pages/Course.jsx";
 import PriveteRoute from "./components/PriveteRoute.jsx";
 import Profile from "./pages/Profile.jsx";
+import Teacher from "./pages/Teacher.jsx";
+
+import AllCourses from "./pages/AllCourses.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -28,12 +31,16 @@ const router = createBrowserRouter([
         element: <Signup />,
       },
       {
+        path: "/courses",
+        element: <AllCourses />,
+      },
+      {
         path: "/course/:courseId",
-        element: (
-          <PriveteRoute>
-            <Course />
-          </PriveteRoute>
-        ),
+        element: <Course />,
+      },
+      {
+        path: "/teacher/:teacherId",
+        element: <Teacher />,
       },
       {
         path: "/profile/:courseId",

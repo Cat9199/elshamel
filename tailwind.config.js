@@ -122,7 +122,6 @@ const config = {
           display: "flex",
           height: "2.5rem",
           width: "100%",
-
           backgroundColor: "var(--background)",
           paddingTop: "0.5rem",
           paddingBottom: "0.5rem",
@@ -147,6 +146,10 @@ const config = {
         ".main-input:focus-visible": {
           outline: "none",
           boxShadow: "none",
+        },
+        ".cards-container": {
+          display: "grid",
+          "grid-template-columns": "repeat(auto-fill, minmax(250px, 300px))",
         },
       };
 

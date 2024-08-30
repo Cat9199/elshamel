@@ -18,7 +18,7 @@ export default function Profile() {
           }  w-full `}
           onClick={() => setSection("1")}
         >
-          البيانات الشخصية
+          كورساتي
         </button>
         <button
           className={`${
@@ -26,7 +26,7 @@ export default function Profile() {
           }  w-full `}
           onClick={() => setSection("2")}
         >
-          كلمة السر
+          البيانات الشخصية
         </button>
         <button
           className={`${
@@ -34,7 +34,7 @@ export default function Profile() {
           }  w-full `}
           onClick={() => setSection("3")}
         >
-          كورساتي
+          كلمة السر
         </button>
         <button
           className={`${
@@ -46,9 +46,9 @@ export default function Profile() {
         </button>
       </div>
       <div className="my-10">
-        {sectionBar === "1" && <ProfileForm />}
-        {sectionBar === "2" && <PasswordFrom />}
-        {sectionBar === "3" && <CoursesSec />}
+        {sectionBar === "1" && <CoursesSec user={true} />}
+        {sectionBar === "2" && <ProfileForm />}
+        {sectionBar === "3" && <PasswordFrom />}
         {sectionBar === "4" && <div>قريبا</div>}
       </div>
     </div>
