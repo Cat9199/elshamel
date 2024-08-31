@@ -7,7 +7,7 @@ import Accordion from "../components/Accordion";
 import { toast, Toaster } from "sonner";
 export default function Course() {
   const { courseId } = useParams();
-  const { userCourses } = useUserStore();
+  const { userCourses, user } = useUserStore();
   const [courseInfo, setCourseInfo] = useState([]);
   const [teacherInfo, setTeacherInfo] = useState({});
 
@@ -37,10 +37,13 @@ export default function Course() {
   console.log(courseInfo);
   const navigate = useNavigate();
   const userCoursesIds = userCourses.map((course) => course.id);
+  console.log(user);
 
   const codeHandler = async (e) => {
     e.preventDefault();
-
+    if (Object.keys(user).length === 0) {
+      navigate("/signin");
+    }
     try {
       await axiosInstance
         .post(`https://elshamelapi.js-py.me/api/student/course/enroll`, {

@@ -11,7 +11,6 @@ export default function TeachersSec() {
           "https://elshamelapi.js-py.me/teachers"
         );
         setTeachers(res.data);
-        console.log(res.data);
       } catch (error) {
         console.log(error);
       }

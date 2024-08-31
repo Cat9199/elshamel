@@ -24,7 +24,7 @@ export default function Signin() {
     mode: "onChange",
   });
   const navigate = useNavigate();
-  const { setUser } = useUserStore((state) => state);
+  const { setUser, setUserCourses } = useUserStore((state) => state);
   const token = Cookies.get("token");
   useEffect(() => {
     if (token && token !== "undefined") {
@@ -42,7 +42,16 @@ export default function Signin() {
       .then((res) => {
         Cookies.set("token", res.data.token);
         setUser(res.data.user);
-        navigate("/");
+        console.log(res.data);
+
+        // navigate("/");
+      })
+      .then(() => {
+        axiosInstance.get("auth/profile").then((res) => {
+          setUser(res.data.user);
+          setUserCourses(res.data.courses);
+          navigate("/");
+        });
       })
       .catch(() => {
         setErrorMessage("البريد الإلكتروني او كلمة السر خاطئة");

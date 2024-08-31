@@ -1,6 +1,6 @@
 import logo1 from "../assets/logo1.png";
 import logo2 from "../assets/logo2.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import burger from "../assets/hamburger.png";
 import { useEffect, useState } from "react";
 import SlideMenu from "./SlideMenu";
@@ -14,19 +14,15 @@ export default function Navbar() {
 
   const { setUser, user, setUserCourses } = useUserStore((state) => state);
 
-  useEffect(() => {
-    if (Object.keys(user).length === 0) {
-      axiosInstance
-        .get("auth/profile")
-        .then((res) => {
-          setUser(res.data.user);
-          setUserCourses(res.data.courses);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [token]);
+  const navigate = useNavigate();
+
+  const logoutHandler = () => {
+    Cookies.remove("token");
+    setUser({});
+    setUserCourses([]);
+
+    navigate("/");
+  };
 
   return (
     <>
@@ -34,17 +30,26 @@ export default function Navbar() {
       <div className="h-20 w-full sticky top-0  shadow-nav z-30 bg-white ">
         <div className="container flex justify-between items-center max-md:gap-5 h-full m-auto px-5">
           {token ? (
-            <Link
-              to={`/profile/${user.id}`}
-              className="flex items-center gap-5 "
-            >
-              <div className="w-10 h-10 overflow-hidden rounded-full">
-                <img src={user.profile_pic} alt="" className="w-full" />
-              </div>
-              <div className="max-md:hidden">
-                <p className="text-sm text-slate-600">{user.name}</p>
-              </div>
-            </Link>
+            <div className="flex items-center gap-5">
+              {" "}
+              <Link
+                to={`/profile/${user.id}`}
+                className="flex items-center gap-5 "
+              >
+                <div className="w-10 h-10 overflow-hidden rounded-full">
+                  <img src={user.profile_pic} alt="" className="w-full" />
+                </div>
+                <div className="max-md:hidden">
+                  <p className="text-sm text-slate-600">{user.name}</p>
+                </div>
+              </Link>
+              <button
+                onClick={logoutHandler}
+                className="py-2 px-4 rounded-full bg-red-600 text-white cursor-pointer inline-block"
+              >
+                تسجيل الخروج
+              </button>
+            </div>
           ) : (
             <Link to={"/signin"} className="main-btn max-md:hidden">
               سجل
