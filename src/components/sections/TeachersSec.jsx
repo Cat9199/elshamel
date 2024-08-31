@@ -37,7 +37,11 @@ export default function TeachersSec() {
                   <img src={teacher.profile_pic} alt="" className="w-20" />
                 </div>
 
-                <h1 className="text-slate-700 text-xl font-bold text-nowrap">
+                <h1
+                  className={`text-slate-700 ${
+                    teacher.name.length > 20 ? "text-base" : "text-lg"
+                  }  font-bold text-nowrap`}
+                >
                   {teacher.name}
                 </h1>
               </Link>

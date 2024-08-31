@@ -18,6 +18,8 @@ export default function CoursesSec({ user, page }) {
     setAllCategories,
     allCategories,
   } = useUserStore();
+  const userCoursesIds = userCourses.map((course) => course.id);
+
   useEffect(() => {
     const getCourses = async () => {
       try {
@@ -45,7 +47,7 @@ export default function CoursesSec({ user, page }) {
     getCategories();
   }, [setAllCourses, selectedCountry, user, setAllCategories]);
   const categories = [...new Set(userCourses.map((item) => item.category))];
-  console.log(page, user);
+
   return (
     <div className="max-w-[1300px] m-auto max-md:px-5">
       <h1 className="text-center gradient-text text-3xl font-bold mb-10">
@@ -132,13 +134,24 @@ export default function CoursesSec({ user, page }) {
                         <p className="text-slate-600 text-2xl font-semibold">
                           {course.price} ج م
                         </p>
-                        <Link
-                          to={`/course/${course.id}`}
-                          className="gradient-text font-semibold text-lg flex justify-start items-center"
-                        >
-                          اقرا المزيد
-                          <IoIosArrowBack className="text-blue-800 text-2xl" />
-                        </Link>
+
+                        {userCoursesIds.includes(course.id) ? (
+                          <Link
+                            to={`/course/play/${course.id}`}
+                            className="gradient-text font-semibold text-lg flex justify-start items-center"
+                          >
+                            اكمل التعلم
+                            <IoIosArrowBack className="text-blue-800 text-2xl" />
+                          </Link>
+                        ) : (
+                          <Link
+                            to={`/course/${course.id}`}
+                            className="gradient-text font-semibold text-lg flex justify-start items-center"
+                          >
+                            اقرا المزيد
+                            <IoIosArrowBack className="text-blue-800 text-2xl" />
+                          </Link>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -201,13 +214,24 @@ export default function CoursesSec({ user, page }) {
                             <p className="text-slate-600 text-2xl font-semibold">
                               {course.price} ج م
                             </p>
-                            <Link
-                              to={`/course/${course.id}`}
-                              className="gradient-text font-semibold text-lg flex justify-start items-center"
-                            >
-                              اقرا المزيد
-                              <IoIosArrowBack className="text-blue-800 text-2xl" />
-                            </Link>
+
+                            {userCoursesIds.includes(course.id) ? (
+                              <Link
+                                to={`/course/play/${course.id}`}
+                                className="gradient-text font-semibold text-lg flex justify-start items-center"
+                              >
+                                اكمل التعلم
+                                <IoIosArrowBack className="text-blue-800 text-2xl" />
+                              </Link>
+                            ) : (
+                              <Link
+                                to={`/course/${course.id}`}
+                                className="gradient-text font-semibold text-lg flex justify-start items-center"
+                              >
+                                اقرا المزيد
+                                <IoIosArrowBack className="text-blue-800 text-2xl" />
+                              </Link>
+                            )}
                           </div>
                         </div>
                       </div>

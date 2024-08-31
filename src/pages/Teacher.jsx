@@ -8,7 +8,6 @@ import { FaUniversity } from "react-icons/fa";
 export default function Teacher() {
   const { teacherId } = useParams();
   const [teachers, setTeachers] = useState({});
-  console.log(teachers);
 
   useEffect(() => {
     const getTeachers = async () => {
