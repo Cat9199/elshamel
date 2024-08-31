@@ -36,6 +36,7 @@ export default function Course() {
   }, [courseId]);
   console.log(courseInfo);
   const navigate = useNavigate();
+  const userCoursesIds = userCourses.map((course) => course.id);
 
   const codeHandler = async (e) => {
     e.preventDefault();
@@ -67,16 +68,25 @@ export default function Course() {
             </h1>
           </Link>
 
-          <form className=" text-white space-y-3 " onSubmit={codeHandler}>
-            <h1 className="text-xl">خيارات الدفع</h1>
-            <input
-              type="text"
-              placeholder="ادخل الكود"
-              required
-              className="main-input border border-blue-800 "
-            />
-            <button className="main-btn w-full">تاكيد الدفع</button>
-          </form>
+          {userCoursesIds.includes(parseInt(courseId)) ? (
+            <Link
+              to={`/course/play/${courseId}`}
+              className="main-btn w-full m-auto block text-center"
+            >
+              اكمل التعلم
+            </Link>
+          ) : (
+            <form className=" text-white space-y-3 " onSubmit={codeHandler}>
+              <h1 className="text-xl">خيارات الدفع</h1>
+              <input
+                type="text"
+                placeholder="ادخل الكود"
+                required
+                className="main-input border border-blue-800 "
+              />
+              <button className="main-btn w-full">تاكيد الدفع</button>
+            </form>
+          )}
         </div>
       </div>
       <div className="w-[calc(100vw-300px)] max-md:w-full  p-10 space-y-10 ">
