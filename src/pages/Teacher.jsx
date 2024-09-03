@@ -30,7 +30,9 @@ export default function Teacher() {
           <div className="w-20 h-20 rounded-full overflow-hidden m-auto">
             <img src={teachers.teacher?.profile_pic} alt="" />
           </div>
-          <h1 className="text-white text-center text-2xl  ">عبد الرحمن</h1>
+          <h1 className="text-white text-center text-2xl  ">
+            {teachers && teachers.teacher?.name}
+          </h1>
         </div>
         <div>
           <p className="text-white text-sm"> البريد الالكتروني : </p>
