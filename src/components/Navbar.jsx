@@ -14,6 +14,20 @@ export default function Navbar() {
 
   const { setUser, user, setUserCourses } = useUserStore((state) => state);
 
+  useEffect(() => {
+    if (token && token !== "undefined") {
+      axiosInstance
+        .get("auth/profile")
+        .then((res) => {
+          setUser(res.data.user);
+          setUserCourses(res.data.courses);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [token]);
+
   const navigate = useNavigate();
 
   const logoutHandler = () => {

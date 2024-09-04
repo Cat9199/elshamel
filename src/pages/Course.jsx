@@ -12,9 +12,6 @@ export default function Course() {
   const [teacherInfo, setTeacherInfo] = useState({});
 
   useEffect(() => {
-    if (userCourses.some((item) => item.id === courseInfo?.course?.id)) {
-      console.log("yes there is match course");
-    }
     const getCourse = async () => {
       try {
         const courseResponse = await axiosInstance.get(

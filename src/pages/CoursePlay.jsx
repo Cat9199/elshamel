@@ -17,10 +17,6 @@ export default function CoursePlay() {
   console.log(vid);
 
   useEffect(() => {
-    if (userCourses.some((item) => item.id === courseInfo?.course?.id)) {
-      console.log("yes there is a match course");
-    }
-
     const getCourse = async () => {
       try {
         const courseResponse = await axiosInstance.get(
