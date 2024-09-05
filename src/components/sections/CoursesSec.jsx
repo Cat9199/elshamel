@@ -119,7 +119,7 @@ export default function CoursesSec({ user, page }) {
                       />
                     </div>
                     <div className="p-5 space-y-3">
-                      <h1 className="text-slate-700 text-xl font-bold">
+                      <h1 className="text-slate-700 text-xl font-bold text-ellipsis overflow-hidden text-nowrap">
                         {course.title}
                       </h1>
                       <div className="flex items-center gap-3 text-slate-600">
@@ -199,7 +199,10 @@ export default function CoursesSec({ user, page }) {
                           />
                         </div>
                         <div className="p-5 space-y-3">
-                          <h1 className="text-slate-700 text-xl font-bold">
+                          <h1
+                            title={course.title}
+                            className="text-slate-700 text-xl font-bold text-ellipsis overflow-hidden text-nowrap"
+                          >
                             {course.title}
                           </h1>
                           <div className="flex items-center gap-3 text-slate-600">

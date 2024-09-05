@@ -54,11 +54,7 @@ const router = createBrowserRouter([
       },
       {
         path: "course/play/:courseId",
-        element: (
-          <LessonPrivateRoute>
-            <CoursePlay />
-          </LessonPrivateRoute>
-        ),
+        element: <CoursePlay />,
       },
     ],
   },

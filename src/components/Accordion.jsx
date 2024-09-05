@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { MdExpandMore } from "react-icons/md"; // Import the icon from react-icons
 
+// eslint-disable-next-line react/prop-types
 const Accordion = ({ title, lessons, setVid, setVidName }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -25,12 +26,11 @@ const Accordion = ({ title, lessons, setVid, setVidName }) => {
         <div className="">
           {lessons.map((lesson, index) => (
             <div
+              key={index}
               onClick={() => {
                 setVid(lesson.embed);
                 setVidName(lesson.title);
-                console.log(lesson.embed);
               }}
-              key={index}
               className=" cursor-pointer bg-white hover:bg-blue-300 p-4"
             >
               <h3 className="font-semibold">{lesson.title}</h3>

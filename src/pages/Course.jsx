@@ -10,6 +10,7 @@ export default function Course() {
   const { userCourses, user } = useUserStore();
   const [courseInfo, setCourseInfo] = useState([]);
   const [teacherInfo, setTeacherInfo] = useState({});
+  // console.log(courseInfo.course.price);
 
   useEffect(() => {
     const getCourse = async () => {
@@ -31,10 +32,9 @@ export default function Course() {
     };
     getCourse();
   }, [courseId]);
-  console.log(courseInfo);
+
   const navigate = useNavigate();
   const userCoursesIds = userCourses.map((course) => course.id);
-  console.log(user);
 
   const codeHandler = async (e) => {
     e.preventDefault();
@@ -47,13 +47,16 @@ export default function Course() {
           course_id: courseId,
           Pay_code: courseInfo?.course?.is_free ? "" : e.target[0].value,
         })
-        .then(() => {
-          navigate(`/course/play/${courseId}`);
+        .then((res) => {
+          if (res.data.message === "تم التسجيل في الدورة بنجاح") {
+            navigate(`/course/play/${courseId}`);
+          }
         });
     } catch (err) {
       toast.error(err.response.data.message);
     }
   };
+
   return (
     <div className="flex  max-md:flex-col max-md:gap-10 max-md:h-auto max-md:p-5">
       <Toaster position="bottom-right " richColors />
@@ -75,6 +78,10 @@ export default function Course() {
             >
               اكمل التعلم
             </Link>
+          ) : courseInfo?.course?.price === 0 ? (
+            <button onClick={codeHandler} className="main-btn w-full">
+              اضف الكورس
+            </button>
           ) : (
             <form className=" text-white space-y-3 " onSubmit={codeHandler}>
               <h1 className="text-xl">خيارات الدفع</h1>

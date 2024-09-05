@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../lib/axiosInstance";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useUserStore } from "../store/store";
-import createDOMPurify from "dompurify";
+
 import Accordion from "../components/Accordion";
-import { toast, Toaster } from "sonner";
+import { Toaster } from "sonner";
 
 export default function CoursePlay() {
   const { courseId } = useParams();
@@ -14,9 +14,10 @@ export default function CoursePlay() {
   const [vid, setVid] = useState();
   const [VidName, setVidName] = useState();
 
-  console.log(vid);
-
   useEffect(() => {
+    // if (!userCoursesIds.includes(parseInt(courseId))) {
+    //   return navigate(`/course/${courseId}`);
+    // }
     const getCourse = async () => {
       try {
         const courseResponse = await axiosInstance.get(
@@ -40,25 +41,14 @@ export default function CoursePlay() {
   }, [courseId]);
 
   useEffect(() => {
-    // For executing scripts within the HTML content
-    // const scriptElements = document.querySelectorAll("script");
-
-    // scriptElements.forEach((script) => {
-    //   const scriptCopy = document.createElement("script");
-    //   scriptCopy.src = script.src;
-    //   scriptCopy.innerHTML = script.innerHTML;
-    //   scriptCopy.async = script.async;
-    //   script.parentNode.replaceChild(scriptCopy, script);
-    // });
     const script = document.createElement("script");
     script.src = "https://player.twitch.tv/js/embed/v1.js";
     script.async = true;
 
-    // Load the script and initialize the Twitch player after the script has loaded
     script.onload = () => {
       if (window.Twitch) {
         new window.Twitch.Player("twitch-embed", {
-          channel: "abdelrahman_nasr9", // Update with your dynamic channel if needed
+          channel: "abdelrahman_nasr9",
           width: "100%",
           height: "100%",
           autoplay: true,
