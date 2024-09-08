@@ -23,6 +23,7 @@ export default function CoursePlay() {
         const courseResponse = await axiosInstance.get(
           `https://elshamelapi.js-py.me/api/student/course/${courseId}`
         );
+
         setCourseInfo(courseResponse.data);
         setVid(courseResponse.data.sections[0].lessons[0].embed);
         setVidName(courseResponse.data.sections[0].lessons[0].title);
@@ -60,12 +61,12 @@ export default function CoursePlay() {
   }, [vid]);
 
   return (
-    <div className="flex max-md:flex-col max-md:gap-10 max-md:h-auto max-md:p-5">
+    <div className="flex max-md:flex-col max-md:gap-10 max-md:h-auto max-md:p-5 px-5 py-5">
       <Toaster position="bottom-right " richColors />
-      <div className="w-[300px] max-md:w-full max-md:shadow-xl p-10 gradient max-md:rounded-2xl space-y-6 max-md:order-1">
+      <div className="w-[300px] max-md:w-full shadow-2xl p-10 rounded-3xl space-y-6 max-md:order-1">
         <div className="space-y-10">
           <div className="space-y-3">
-            <h1 className="text-white text-center text-2xl">
+            <h1 className="gradient-text text-center text-2xl">
               {courseInfo.course?.title}
             </h1>
             <div className="w-full rounded-2xl overflow-hidden">

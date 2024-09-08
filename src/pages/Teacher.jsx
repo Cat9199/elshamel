@@ -5,10 +5,13 @@ import { useEffect, useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import { PiStudentLight } from "react-icons/pi";
 import { FaUniversity } from "react-icons/fa";
+import { IoChatbubblesOutline } from "react-icons/io5";
+import { FaRegShareFromSquare } from "react-icons/fa6";
+import { toast, Toaster } from "sonner";
 export default function Teacher() {
   const { teacherId } = useParams();
   const [teachers, setTeachers] = useState({});
-
+  const [search, setSearch] = useState("");
   useEffect(() => {
     const getTeachers = async () => {
       try {
@@ -23,79 +26,98 @@ export default function Teacher() {
     };
     getTeachers();
   }, [teacherId]);
+  const copyUrlToClipboard = () => {
+    const currentUrl = window.location.href;
+
+    navigator.clipboard.writeText(currentUrl).then(() => {
+      toast.success("تم نسخ الرابط بنجاح");
+    });
+  };
+
   return (
-    <div className="flex h-[calc(100vh-80px)] max-md:flex-col max-md:gap-10 max-md:h-auto max-md:p-5">
-      <div className="w-[300px] max-md:w-full  max-md:shadow-xl p-10 gradient  max-md:rounded-2xl space-y-6">
+    <div className="  max-md:p-5">
+      <Toaster position="bottom-right" richColors />
+      <div className="  p-10    space-y-6">
         <div className="space-y-3">
-          <div className="w-20 h-20 rounded-full overflow-hidden m-auto">
+          <div className="w-32 h-32 rounded-full overflow-hidden m-auto">
             <img src={teachers.teacher?.profile_pic} alt="" />
           </div>
-          <h1 className="text-white text-center text-2xl  ">
+          <h1 className="gradient-text text-center font-medium text-3xl  ">
             {teachers && teachers.teacher?.name}
           </h1>
-        </div>
-        <div>
-          <p className="text-white text-sm"> البريد الالكتروني : </p>
-          <p className="text-white text-xl">
-            {teachers && teachers.teacher?.email}
-          </p>
-        </div>
-        <div>
-          <p className="text-white text-sm"> رقم الجوال: </p>
-          <p className="text-white text-xl">
-            {teachers && teachers.teacher?.phone}
-          </p>
+          <div className="m-auto w-fit flex gap-4 justify-center items-center">
+            <button
+              disabled
+              className="py-2 px-4 border border-blue-500 flex rounded-full gap-2 items-center"
+            >
+              دردشة <IoChatbubblesOutline />
+            </button>
+            <button
+              onClick={copyUrlToClipboard}
+              className="py-2 px-4 border border-blue-500 flex rounded-full gap-2 items-center"
+            >
+              مشاركة <FaRegShareFromSquare />
+            </button>
+          </div>
         </div>
       </div>
-      <div className="flex-grow  p-10 h-full max-md:h-auto overflow-y-scroll">
-        <h1 className="text-center gradient-text text-3xl font-bold mb-8">
-          الكورسات
-        </h1>
-        <div className="cards-container gap-5">
+      <div className="  p-5 px-10 ">
+        <div>
+          <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="ابحث ....."
+            type="text"
+            className={`main-input  border    border-formBlue w-full max-w-[200px]`}
+          />
+        </div>
+        <div className="cards-container gap-5 mt-5">
           {Object.keys(teachers).length > 0 &&
-            teachers.courses.map((course) => {
-              return (
-                <div
-                  key={course.id}
-                  className="flex justify-center items-center max-w-[316px] max-md:max-w-full shadow-xl rounded-3xl"
-                >
-                  <div className="w-full rounded-3xl overflow-hidden bg-white">
-                    <div className="w-full h-52 overflow-hidden">
-                      <img
-                        src={`https://elshamelapi.js-py.me/images/${course.image}`}
-                        alt=""
-                        className="object-cover h-full w-full"
-                      />
-                    </div>
-                    <div className="p-5 space-y-3">
-                      <h1 className="text-slate-700 text-xl font-bold">
-                        {course.title}
-                      </h1>
-                      <div className="flex items-center gap-3 text-slate-600">
-                        <FaUniversity />
-                        <p>{course.category}</p>
+            teachers.courses
+              .filter((course) => course.title.includes(search))
+              .map((course) => {
+                return (
+                  <div
+                    key={course.id}
+                    className="flex justify-center items-center max-w-[316px] max-md:max-w-full shadow-xl rounded-3xl"
+                  >
+                    <div className="w-full rounded-3xl overflow-hidden bg-white">
+                      <div className="w-full h-52 overflow-hidden">
+                        <img
+                          src={`https://elshamelapi.js-py.me/images/${course.image}`}
+                          alt=""
+                          className="object-cover h-full w-full"
+                        />
                       </div>
-                      <div className="flex items-center gap-3 text-slate-600">
-                        <PiStudentLight />
-                        <p>{course.instructor}</p>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <p className="text-slate-600 text-2xl font-semibold">
-                          {course.price} ج م
-                        </p>
-                        <Link
-                          to={`/course/${course.id}`}
-                          className="gradient-text font-semibold text-lg flex justify-start items-center"
-                        >
-                          اقرا المزيد
-                          <IoIosArrowBack className="text-blue-800 text-2xl" />
-                        </Link>
+                      <div className="p-5 space-y-3">
+                        <h1 className="text-slate-700 text-xl font-bold">
+                          {course.title}
+                        </h1>
+                        <div className="flex items-center gap-3 text-slate-600">
+                          <FaUniversity />
+                          <p>{course.category}</p>
+                        </div>
+                        <div className="flex items-center gap-3 text-slate-600">
+                          <PiStudentLight />
+                          <p>{course.instructor}</p>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <p className="text-slate-600 text-2xl font-semibold">
+                            {course.price} ج م
+                          </p>
+                          <Link
+                            to={`/course/${course.id}`}
+                            className="gradient-text font-semibold text-lg flex justify-start items-center"
+                          >
+                            اقرا المزيد
+                            <IoIosArrowBack className="text-blue-800 text-2xl" />
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
         </div>
       </div>
     </div>

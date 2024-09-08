@@ -60,3 +60,24 @@ body {
 .vid-stream iframe {
   min-height: 700px;
 }
+.phone-menu {
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+  height: 64px;
+  bottom: 0;
+  background-color: #000;
+  display: none;
+}
+.rest {
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .phone-menu {
+    display: block;
+  }
+  .rest {
+    padding-bottom: 64px;
+  }
+}

@@ -40,7 +40,10 @@ export default function Signin() {
     axiosInstance
       .post("auth/login", finalData)
       .then((res) => {
-        Cookies.set("token", res.data.token);
+        Cookies.set("token", res.data.token, {
+          expires: 90,
+          path: "/",
+        });
         setUser(res.data.user);
         console.log(res.data);
 

@@ -20,12 +20,23 @@ export default function TeachersSec() {
     };
     getTeachers();
   }, []);
+
+  const [search, setSearch] = useState("");
   return (
     <div>
       <div className="max-w-[1300px] m-auto py-20 px-5">
         <h1 className="text-center gradient-text text-3xl font-bold mb-10">
           المحاضرين
         </h1>
+        <div>
+          <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="ابحث ....."
+            type="text"
+            className={`main-input  border    border-formBlue w-full max-w-[200px]`}
+          />
+        </div>
 
         <div className="w-full my-10">
           <Swiper
@@ -49,29 +60,35 @@ export default function TeachersSec() {
             }}
             className="mySwiper"
           >
-            {teachers.map((teacher) => {
-              return (
-                <SwiperSlide key={teacher.id}>
-                  <Link
-                    to={`/teacher/${teacher.id}`}
-                    state={{ teacher }}
-                    className="bg-white rounded-3xl py-8 px-10 flex flex-col items-center justify-center gap-4 h-52  w-52 max-md:w-full"
-                  >
-                    <div className="w-20 h-20 rounded-full overflow-hidden">
-                      <img src={teacher.profile_pic} alt="" className="w-20" />
-                    </div>
-
-                    <h1
-                      className={`text-slate-700 ${
-                        teacher.name.length > 20 ? "text-base" : "text-lg"
-                      }  font-bold text-nowrap`}
+            {teachers
+              .filter((teacher) => teacher.name.includes(search))
+              .map((teacher) => {
+                return (
+                  <SwiperSlide key={teacher.id}>
+                    <Link
+                      to={`/teacher/${teacher.id}`}
+                      state={{ teacher }}
+                      className="bg-white rounded-3xl py-8 px-10 flex flex-col items-center justify-center gap-4 h-52  w-52 max-md:w-full"
                     >
-                      {teacher.name}
-                    </h1>
-                  </Link>
-                </SwiperSlide>
-              );
-            })}
+                      <div className="w-20 h-20 rounded-full overflow-hidden">
+                        <img
+                          src={teacher.profile_pic}
+                          alt=""
+                          className="w-20"
+                        />
+                      </div>
+
+                      <h1
+                        className={`text-slate-700 ${
+                          teacher.name.length > 20 ? "text-base" : "text-lg"
+                        }  font-bold text-nowrap`}
+                      >
+                        {teacher.name}
+                      </h1>
+                    </Link>
+                  </SwiperSlide>
+                );
+              })}
           </Swiper>
         </div>
       </div>

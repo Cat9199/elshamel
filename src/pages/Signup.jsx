@@ -156,7 +156,10 @@ export default function Signup() {
     axiosInstance
       .post("auth/register", finalData)
       .then((res) => {
-        Cookies.set("token", res.data.token);
+        Cookies.set("token", res.data.token, {
+          expires: 90,
+          path: "/",
+        });
       })
       .then(() => {
         axiosInstance.get("auth/profile").then((res) => {
