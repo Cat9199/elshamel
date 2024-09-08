@@ -31,9 +31,9 @@ export default function CoursesSec({ user, page }) {
         console.log(err);
       }
     };
-    if (!user) {
-      getCourses();
-    }
+
+    getCourses();
+
     const getCategories = async () => {
       try {
         const res = await axiosInstance.get(
