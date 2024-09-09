@@ -45,6 +45,15 @@ export default function Teacher() {
           <h1 className="gradient-text text-center font-medium text-3xl  ">
             {teachers && teachers.teacher?.name}
           </h1>
+          <p className="text-center text-gray-500">
+            مدرس في منصة الشامل التعليمية يهدف إلى تبسيط المفاهيم العلمية
+            وتقديمها بأسلوب يسهل على الطلاب فهمها
+          </p>
+          <p className="text-center text-gray-500">
+            An instructor at Elshamel Academy Platform aims to simplify
+            scientific concepts and present them in a way that is easy for
+            students to understand.
+          </p>
           <div className="m-auto w-fit flex gap-4 justify-center items-center">
             <button
               disabled

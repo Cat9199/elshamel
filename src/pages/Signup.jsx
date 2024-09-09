@@ -70,7 +70,7 @@ export default function Signup() {
         .max(15, "رقم الجوال غير صحيح"),
       role: z.string().min(2, "يحب اختبار نوع العضوية"),
       section: z.string().optional(),
-      parentNumber: z.string().min(1, "رقم الهاتف الأجتماعي مطلوب").optional(),
+      paranet_phone: z.string().min(1, "رقم الهاتف الأجتماعي مطلوب").optional(),
       country: z.string().min(1, "يجب اختيار البلد"),
       city: z.string().min(1, "يجب اختيار المدينة"),
       password: z.string().min(6, "كلمة السر يجب أن تكون 6 أحرف على الأقل"),
@@ -105,7 +105,7 @@ export default function Signup() {
         return true;
       },
       {
-        path: ["[parentNumber]"],
+        path: ["[paranet_phone]"],
         message: "يحب اختبار رقم جوال ولي الامر للطلاب",
       }
     );
@@ -143,7 +143,7 @@ export default function Signup() {
   const onSubmit = (data) => {
     const finalData = {
       name: data.fullName,
-      email: data.email,
+      email: data.email.toLowerCase(),
       phone: data.phone,
       role: data.role,
       country: data.country,
@@ -151,8 +151,9 @@ export default function Signup() {
       password: data.password,
       login_type: "Email",
       section: data.section,
-      parentNumber: data.parentNumber ? data.parentNumber : "",
+      paranet_phone: data.paranet_phone ? data.paranet_phone : "",
     };
+
     axiosInstance
       .post("auth/register", finalData)
       .then((res) => {
@@ -177,11 +178,11 @@ export default function Signup() {
   const section = watch("section");
 
   return (
-    <div className="min-h-[calc(100vh-80px)] gradient py-10 grid place-items-center max-md:px-5">
+    <div className="min-h-[calc(100vh-80px)]  py-10 grid place-items-center max-md:px-5">
       <form
         onSubmit={handleSubmit(onSubmit)}
         style={{ direction: "rtl" }}
-        className="w-[500px] max-md:w-full bg-white rounded-3xl m-auto  p-10 "
+        className="w-[500px] max-md:w-full shadow-2xl bg-white rounded-3xl m-auto  p-10 "
       >
         <h1 className="text-center gradient-text text-2xl mb-5">
           تسجيل حساب جديد
@@ -310,21 +311,21 @@ export default function Signup() {
           ) {
             return (
               <div>
-                <label htmlFor="parentNumber" className="mr-2 gradient-text">
+                <label htmlFor="paranet_phone" className="mr-2 gradient-text">
                   رقم جوال ولي الامر
                 </label>
                 <input
-                  {...register("parentNumber")}
+                  {...register("paranet_phone")}
                   type="number"
-                  id="parentNumber"
+                  id="paranet_phone"
                   className={`main-input border ${
-                    errors.parentNumber ? "border-red-400" : "border-formBlue"
+                    errors.paranet_phone ? "border-red-400" : "border-formBlue"
                   }`}
                 />
                 <div className="h-6">
-                  {errors.parentNumber && (
+                  {errors.paranet_phone && (
                     <p className="text-red-400 text-xs pr-5 pt-2">
-                      {errors.parentNumber.message}
+                      {errors.paranet_phone.message}
                     </p>
                   )}
                 </div>

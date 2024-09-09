@@ -66,18 +66,42 @@ body {
   z-index: 999;
   height: 64px;
   bottom: 0;
-  background-color: #000;
+  background-color: #436ee4;
   display: none;
+  border-radius: 20px 20px 0 0;
 }
 .rest {
   padding: 0;
 }
 
+.whats-icon {
+  margin: 0 0 20px 0;
+  position: fixed;
+  z-index: 16000160;
+  bottom: 0;
+  text-align: center;
+  height: 52px;
+  min-width: 52px;
+  border: 0 solid #363636;
+  border-radius: 100px;
+  visibility: visible;
+  transition: none;
+  background-color: #436ee4;
+  box-shadow: 4px 5px 10px rgba(0, 0, 0, 0.4);
+  right: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 @media (max-width: 768px) {
   .phone-menu {
-    display: block;
+    display: flex;
   }
   .rest {
     padding-bottom: 64px;
+  }
+  .whats-icon {
+    bottom: 84px;
   }
 }

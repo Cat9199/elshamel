@@ -15,10 +15,12 @@ import Teacher from "./pages/Teacher.jsx";
 
 import AllCourses from "./pages/AllCourses.jsx";
 import CoursePlay from "./pages/CoursePlay.jsx";
+import NotFound from "./pages/NotFound.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <NotFound />,
     children: [
       {
         index: true,

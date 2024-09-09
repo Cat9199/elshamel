@@ -60,7 +60,7 @@ export default function Course() {
   return (
     <div className="flex  max-md:flex-col max-md:gap-10 max-md:h-auto max-md:p-5">
       <Toaster position="bottom-right " richColors />
-      <div className="w-[300px] max-md:w-full     shadow-2xl p-10 rounded-3xl space-y-6 max-md:order-1">
+      <div className="w-[300px] max-md:w-full max-h-screen     shadow-2xl p-10 rounded-3xl space-y-6 max-md:order-1">
         <div className="space-y-10">
           <Link to={`/teacher/${teacherInfo.teacher?.id}`}>
             <div className="w-20 h-20 rounded-full overflow-hidden m-auto">

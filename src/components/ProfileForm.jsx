@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { axiosInstance } from "../lib/axiosInstance";
-import Cookies from "js-cookie";
+
 import { toast, Toaster } from "sonner";
 
 export default function ProfileForm() {
@@ -58,55 +58,18 @@ export default function ProfileForm() {
     "الباحة",
     "سكاكا",
   ];
-  const schema = z
-    .object({
-      fullName: z.string().min(1, "الاسم بالكامل مطلوب"),
-      email: z.string().email("البريد الإلكتروني غير صحيح"),
-      phone: z
-        .string()
-        .min(10, "رقم الجوال غير صحيح")
-        .max(15, "رقم الجوال غير صحيح"),
-      //   role: z.string().min(2, "يحب اختبار نوع العضوية"),
-      section: z.string().optional(),
-      //   parentNumber: z.string().min(1, "رقم الهاتف الأجتماعي مطلوب").optional(),
-      country: z.string().min(1, "يجب اختيار البلد"),
-      city: z.string().min(1, "يجب اختيار المدينة"),
-      //   password: z.string().min(6, "كلمة السر يجب أن تكون 6 أحرف على الأقل"),
-      //   confirmPassword: z.string().min(6, "تأكيد كلمة السر مطلوب"),
-    })
-    .refine((data) => data.password === data.confirmPassword, {
-      path: ["confirmPassword"],
-      message: "كلمتا السر غير متطابقتين",
-    })
-    .refine(
-      (data) => {
-        if (data.role === "student") {
-          return data.section && data.section.trim() !== "";
-        }
-        return true;
-      },
-      {
-        path: ["section"],
-        message: "يحب اختبار القسم للطلاب",
-      }
-    )
-    .refine(
-      (data) => {
-        if (
-          data.section === undefined &&
-          data.section === "جامعي" &&
-          data.section === "فوق جامعي" &&
-          data.section === ""
-        ) {
-          return data.section && data.section.trim() !== "";
-        }
-        return true;
-      },
-      {
-        path: ["[parentNumber]"],
-        message: "يحب اختبار رقم جوال ولي الامر للطلاب",
-      }
-    );
+  const schema = z.object({
+    fullName: z.string().min(1, "الاسم بالكامل مطلوب"),
+    email: z.string().email("البريد الإلكتروني غير صحيح"),
+    phone: z
+      .string()
+      .min(10, "رقم الجوال غير صحيح")
+      .max(15, "رقم الجوال غير صحيح"),
+
+    country: z.string().min(1, "يجب اختيار البلد"),
+    city: z.string().min(1, "يجب اختيار المدينة"),
+  });
+
   const {
     register,
     handleSubmit,
@@ -142,6 +105,8 @@ export default function ProfileForm() {
     setValue("city", user.city);
   }, [setValue, user]);
   const onSubmit = (data) => {
+    console.log("yes");
+
     const finalData = {
       name: data.fullName,
       email: data.email,
@@ -163,8 +128,7 @@ export default function ProfileForm() {
         setErrorMessage(err.response.data.message);
       });
   };
-  const role = watch("role");
-  const section = watch("section");
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -236,94 +200,6 @@ export default function ProfileForm() {
           )}
         </div>
       </div>
-      {/* <div>
-      <label htmlFor="role" className="mr-2  gradient-text">
-        انضم كـ
-      </label>
-      <select
-        {...register("role")}
-        id="role"
-        className={`main-input  border  ${
-          errors.role ? " border-red-400" : " border-formBlue"
-        } `}
-      >
-        <option value=""></option>
-        <option value="student">طالب</option>
-        <option value="teacher">معلم</option>
-      </select>
-      <div className="h-6">
-        {errors.role && (
-          <p className="text-red-400 text-xs pr-5 pt-2">
-            {errors.role.message}
-          </p>
-        )}
-      </div>
-    </div> */}
-      {/* {role === "student" && (
-      <div>
-        <label htmlFor="section" className="mr-2  gradient-text">
-          القسم
-        </label>
-        <select
-          {...register("section")}
-          id="section"
-          className={`main-input  border  ${
-            errors.section ? " border-red-400" : " border-formBlue"
-          } `}
-        >
-          <option value=""></option>
-          <option value="ابتدائي">ابتدائي</option>
-          <option value="اعدادي">اعدادي</option>
-          <option value="ثانوي">ثانوي</option>
-          <option value="جامعي">جامعي</option>
-          <option value="فوق جامعي">فوق جامعي</option>
-        </select>
-        <div className="h-6">
-          {errors.section && (
-            <p className="text-red-400 text-xs pr-5 pt-2">
-              {errors.section.message}
-            </p>
-          )}
-        </div>
-      </div>
-    )} */}
-      {/* {(() => {
-      if (
-        section !== undefined &&
-        section !== "جامعي" &&
-        section !== "فوق جامعي" &&
-        section !== ""
-      ) {
-        return (
-          <div>
-            <label
-              htmlFor="parentNumber"
-              className="mr-2 gradient-text"
-            >
-              رقم جوال ولي الامر
-            </label>
-            <input
-              {...register("parentNumber")}
-              type="number"
-              id="parentNumber"
-              className={`main-input border ${
-                errors.parentNumber
-                  ? "border-red-400"
-                  : "border-formBlue"
-              }`}
-            />
-            <div className="h-6">
-              {errors.parentNumber && (
-                <p className="text-red-400 text-xs pr-5 pt-2">
-                  {errors.parentNumber.message}
-                </p>
-              )}
-            </div>
-          </div>
-        );
-      }
-      return null;
-    })()} */}
 
       <div>
         <label htmlFor="country" className="mr-2  gradient-text">
@@ -376,49 +252,8 @@ export default function ProfileForm() {
           )}
         </div>
       </div>
-      {/* <div>
-      <label htmlFor="email" className="mr-2  gradient-text">
-        كلمة السر
-      </label>
-      <input
-        {...register("password")}
-        type="password"
-        className={`main-input  border  ${
-          errors.password ? " border-red-400" : " border-formBlue"
-        } `}
-      />
-      <div className="h-6">
-        {errors.password && (
-          <p className="text-red-400 text-xs pr-5 pt-2">
-            {errors.password.message}
-          </p>
-        )}
-      </div>
-    </div>
-    <div>
-      <label htmlFor="email" className="mr-2  gradient-text">
-        تاكيد كلمة السر
-      </label>
-      <input
-        {...register("confirmPassword")}
-        type="password"
-        className={`main-input  border  ${
-          errors.confirmPassword
-            ? " border-red-400"
-            : " border-formBlue"
-        } `}
-      />
-      <div className="h-6">
-        {errors.confirmPassword && (
-          <p className="text-red-400 text-xs pr-5 pt-2">
-            {errors.confirmPassword.message}
-          </p>
-        )}
-      </div>
-    </div> */}
 
       <button
-        //   disabled={isPending}
         type="submit"
         className={` main-btn w-full mt-4 disabled:opacity-50 disabled:cursor-wait`}
       >

@@ -45,9 +45,6 @@ export default function Signin() {
           path: "/",
         });
         setUser(res.data.user);
-        console.log(res.data);
-
-        // navigate("/");
       })
       .then(() => {
         axiosInstance.get("auth/profile").then((res) => {
@@ -62,11 +59,11 @@ export default function Signin() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-80px)] gradient py-10 grid place-items-center max-md:px-5">
+    <div className="min-h-[calc(100vh-80px)]  py-10 grid place-items-center max-md:px-5">
       <form
         onSubmit={handleSubmit(onSubmit)}
         style={{ direction: "rtl" }}
-        className="w-[500px] max-md:w-full bg-white rounded-3xl m-auto  p-10 "
+        className="w-[500px] max-md:w-full bg-white shadow-2xl rounded-3xl m-auto  p-10 "
       >
         <h1 className="text-center gradient-text text-2xl mb-5">
           تسجيل الدخول

@@ -14,6 +14,7 @@ import FeaturesSec from "../components/sections/FeaturesSec";
 import CoursesSec from "../components/sections/CoursesSec";
 import TeachersSec from "../components/sections/TeachersSec";
 import AcademicSec from "../components/sections/AcademicSec";
+import QandA from "../components/sections/QandA";
 
 const Home = () => {
   return (
@@ -64,6 +65,7 @@ const Home = () => {
       </div>
       <FeaturesSec />
       <CoursesSec />
+      <QandA />
       <AcademicSec />
       <TeachersSec />
     </>

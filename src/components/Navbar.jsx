@@ -7,6 +7,8 @@ import SlideMenu from "./SlideMenu";
 import { axiosInstance } from "../lib/axiosInstance";
 import Cookies from "js-cookie";
 import { useUserStore } from "../store/store";
+import { TbLayoutDashboardFilled } from "react-icons/tb";
+import { FaSignOutAlt } from "react-icons/fa";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -26,7 +28,7 @@ export default function Navbar() {
           console.log(err);
         });
     }
-  }, [token]);
+  }, [token, setUser, setUserCourses]);
 
   const navigate = useNavigate();
 
@@ -38,9 +40,11 @@ export default function Navbar() {
     navigate("/");
   };
 
+  console.log(user);
+
   return (
     <>
-      <SlideMenu open={open} setOpen={setOpen} />
+      {/* <SlideMenu open={open} setOpen={setOpen} /> */}
       <div className="h-20 w-full sticky top-0  shadow-nav z-30 bg-white ">
         <div className="container flex justify-between items-center max-md:gap-5 h-full m-auto px-5">
           {token ? (
@@ -59,10 +63,18 @@ export default function Navbar() {
               </Link>
               <button
                 onClick={logoutHandler}
-                className="py-2 px-4 rounded-full bg-red-600 text-white cursor-pointer inline-block"
+                className=" rounded-full  cursor-pointer inline-block"
               >
-                تسجيل الخروج
+                <FaSignOutAlt className="text-3xl text-red-600" />
               </button>
+              {(user.role === "Admin" || user.role === "Teacher") && (
+                <a
+                  href={`https://elshamelapi.js-py.me/api/auth/dashboard/${token}`}
+                  className=""
+                >
+                  <TbLayoutDashboardFilled className="text-blue-600 text-3xl" />
+                </a>
+              )}
             </div>
           ) : (
             <Link to={"/signin"} className="main-btn max-md:hidden">
@@ -79,9 +91,6 @@ export default function Navbar() {
             <Link className="link" to={"/aboutus"}>
               من نحن
             </Link>
-            <Link className="link" to={"/contactus"}>
-              تواصل معنا
-            </Link>
           </div>
           <Link
             to={"/"}
@@ -91,12 +100,12 @@ export default function Navbar() {
             <img src={logo1} alt="logo" className="w-16" />
           </Link>
 
-          <img
+          {/* <img
             onClick={() => setOpen(true)}
             className="hidden max-md:block cursor-pointer"
             src={burger}
             alt="menu-icon"
-          />
+          /> */}
         </div>
       </div>
     </>
