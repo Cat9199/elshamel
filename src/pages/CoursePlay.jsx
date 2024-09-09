@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../lib/axiosInstance";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useUserStore } from "../store/store";
 
 import Accordion from "../components/Accordion";
@@ -13,7 +13,7 @@ export default function CoursePlay() {
   const [teacherInfo, setTeacherInfo] = useState({});
   const [vid, setVid] = useState();
   const [VidName, setVidName] = useState();
-
+  const navigate = useNavigate();
   useEffect(() => {
     // if (!userCoursesIds.includes(parseInt(courseId))) {
     //   return navigate(`/course/${courseId}`);
@@ -21,9 +21,9 @@ export default function CoursePlay() {
     const getCourse = async () => {
       try {
         const courseResponse = await axiosInstance.get(
-          `https://elshamelapi.js-py.me/api/student/course/${courseId}`
+          `https://elshamelapi.js-py.me/api/student/coruse/play/${courseId}`
         );
-
+        console.log(courseResponse.data);
         setCourseInfo(courseResponse.data);
         setVid(courseResponse.data.sections[0].lessons[0].embed);
         setVidName(courseResponse.data.sections[0].lessons[0].title);
@@ -35,7 +35,11 @@ export default function CoursePlay() {
           setTeacherInfo(userResponse.data);
         }
       } catch (err) {
-        console.log(err);
+        if (err.response.data.message === "يجب عليك التسجيل في الدورة أولاً") {
+          navigate(`/course/${courseId}`);
+        } else {
+          navigate("/");
+        }
       }
     };
     getCourse();

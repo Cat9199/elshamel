@@ -1,9 +1,15 @@
-import hero1 from "../assets/summaries.svg";
-import hero2 from "../assets/live-lecture.svg";
-import hero3 from "../assets/quizes.svg";
-import hero4 from "../assets/recorded-lectures.svg";
-import hero5 from "../assets/interactive-questions.svg";
-import hero6 from "../assets/questions-bank.svg";
+// import hero1 from "../assets/summaries.svg";
+// import hero2 from "../assets/live-lecture.svg";
+// import hero3 from "../assets/quizes.svg";
+// import hero4 from "../assets/recorded-lectures.svg";
+// import hero5 from "../assets/interactive-questions.svg";
+// import hero6 from "../assets/questions-bank.svg";
+import hero1 from "../assets/hero1.png";
+import hero2 from "../assets/hero2.png";
+import hero3 from "../assets/hero3.png";
+import hero4 from "../assets/hero4.png";
+import hero5 from "../assets/hero5.png";
+
 import FeaturesSec from "../components/sections/FeaturesSec";
 import CoursesSec from "../components/sections/CoursesSec";
 import TeachersSec from "../components/sections/TeachersSec";
@@ -47,12 +53,12 @@ const Home = () => {
 
           {/* right middel */}
           <div className="absolute max-md:scale-75 max-md:animate-none  top-[calc(50vh-80px)] -right-40 transform animate-bottomToTop max-md:hidden">
-            <img src={hero5} alt="hero1" />
+            <img src={hero3} alt="hero1" />
           </div>
 
           {/* right bottom */}
           <div className="absolute max-md:bottom-0 max-md:scale-75 max-md:animate-none  bottom-10 right-10 transform animate-topToBottom">
-            <img src={hero6} alt="hero1" />
+            <img src={hero5} alt="hero1" />
           </div>
         </div>
       </div>

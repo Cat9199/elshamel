@@ -60,13 +60,13 @@ export default function Course() {
   return (
     <div className="flex  max-md:flex-col max-md:gap-10 max-md:h-auto max-md:p-5">
       <Toaster position="bottom-right " richColors />
-      <div className="w-[300px] max-md:w-full  max-md:shadow-xl p-10 gradient  max-md:rounded-2xl space-y-6 max-md:order-1">
+      <div className="w-[300px] max-md:w-full     shadow-2xl p-10 rounded-3xl space-y-6 max-md:order-1">
         <div className="space-y-10">
           <Link to={`/teacher/${teacherInfo.teacher?.id}`}>
             <div className="w-20 h-20 rounded-full overflow-hidden m-auto">
               <img src={teacherInfo.teacher?.profile_pic} alt="" />
             </div>
-            <h1 className="text-white text-center text-2xl  ">
+            <h1 className="gradient-text text-center text-2xl  ">
               {teacherInfo.teacher?.name}
             </h1>
           </Link>
@@ -84,12 +84,12 @@ export default function Course() {
             </button>
           ) : (
             <form className=" text-white space-y-3 " onSubmit={codeHandler}>
-              <h1 className="text-xl">خيارات الدفع</h1>
+              <h1 className="text-xl gradient-text">خيارات الدفع</h1>
               <input
                 type="text"
                 placeholder="ادخل الكود"
                 required
-                className="main-input border border-blue-800 "
+                className="main-input border border-blue-800  text-blue-600"
               />
               <button className="main-btn w-full">تاكيد الدفع</button>
             </form>
