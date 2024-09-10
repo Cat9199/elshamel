@@ -18,7 +18,7 @@ export default function AddTeacherSec() {
               دورات تدريبية للمعلمين على بعد نقرة واحدة{" "}
             </h2>
             <p className="text-white text-base lg:text-xl leading-[180%] lg:leading-[180%] font-bold text-center lg:text-right">
-              مستعد لرحلة جديدة في مسارك المهني؟ ابدأ الآن وسجّل في أعناب{" "}
+              مستعد لرحلة جديدة في مسارك المهني؟ ابدأ الآن وسجّل في الشامل{" "}
             </p>
           </div>
 
