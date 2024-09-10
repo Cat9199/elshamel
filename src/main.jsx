@@ -16,6 +16,7 @@ import Teacher from "./pages/Teacher.jsx";
 import AllCourses from "./pages/AllCourses.jsx";
 import CoursePlay from "./pages/CoursePlay.jsx";
 import NotFound from "./pages/NotFound.jsx";
+import Aboutus from "./pages/Aboutus.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "/courses",
         element: <AllCourses />,
+      },
+      {
+        path: "/aboutus",
+        element: <Aboutus />,
       },
       {
         path: "/course/:courseId",

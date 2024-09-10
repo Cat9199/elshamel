@@ -15,8 +15,12 @@ import CoursesSec from "../components/sections/CoursesSec";
 import TeachersSec from "../components/sections/TeachersSec";
 import AcademicSec from "../components/sections/AcademicSec";
 import QandA from "../components/sections/QandA";
+import AddTeacherSec from "../components/sections/AddTeacherSec";
+import Cookies from "js-cookie";
 
 const Home = () => {
+  console.log(Cookies.get("token"));
+
   return (
     <>
       <div className="hero relative min-h-[calc(100vh-80px)] bg-gradient-to-b from-blue-50 to-white flex justify-center items-center">
@@ -67,6 +71,8 @@ const Home = () => {
       <CoursesSec />
       <QandA />
       <AcademicSec />
+      {Cookies.get("token") === undefined && <AddTeacherSec />}
+
       <TeachersSec />
     </>
   );
