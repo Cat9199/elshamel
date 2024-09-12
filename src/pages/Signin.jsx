@@ -41,7 +41,7 @@ export default function Signin() {
       .post("auth/login", finalData)
       .then((res) => {
         Cookies.set("token", res.data.token, {
-          expires: 90,
+          expires: 90 * 1000 * 60 * 60 * 24,
           path: "/",
         });
         setUser(res.data.user);
