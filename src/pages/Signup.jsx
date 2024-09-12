@@ -158,7 +158,7 @@ export default function Signup() {
       .post("auth/register", finalData)
       .then((res) => {
         Cookies.set("token", res.data.token, {
-          expires: 90,
+          expires: 90 * 1000 * 60 * 60 * 24,
           path: "/",
         });
       })
