@@ -5,6 +5,7 @@ import { useUserStore } from "../store/store";
 
 import Accordion from "../components/Accordion";
 import { toast, Toaster } from "sonner";
+import { FaLock } from "react-icons/fa";
 export default function Course() {
   const { courseId } = useParams();
   const { userCourses, user } = useUserStore();
@@ -32,6 +33,17 @@ export default function Course() {
     };
     getCourse();
   }, [courseId]);
+  function countTotalLessons(sections) {
+    let totalLessons = 0;
+
+    sections.forEach((section) => {
+      if (section.lessons && Array.isArray(section.lessons)) {
+        totalLessons += section.lessons.length;
+      }
+    });
+
+    return totalLessons;
+  }
 
   const navigate = useNavigate();
   const userCoursesIds = userCourses.map((course) => course.id);
@@ -116,7 +128,13 @@ export default function Course() {
         <div className="flex justify-between items-center flex-wrap  gap-5">
           <div className="flex items-center justify-center gap-3 min-w-[300px] max-md:w-full bg-white py-3 px-6 rounded-3xl shadow-xl">
             <p className="black text-lg">السعر :</p>
-            <p className="gradient-text text-lg">{courseInfo.course?.price}</p>
+            <p className="gradient-text text-lg">
+              {courseInfo.course?.price === 2 ? (
+                <FaLock />
+              ) : (
+                courseInfo.course?.price
+              )}
+            </p>
           </div>
           <div className="flex items-center justify-center gap-3 min-w-[300px] max-md:w-full bg-white py-3 px-6 rounded-3xl shadow-xl">
             <p className="black text-lg">الفئة :</p>
@@ -128,7 +146,8 @@ export default function Course() {
           <div className="flex items-center justify-center gap-3 min-w-[300px] max-md:w-full bg-white py-3 px-6 rounded-3xl shadow-xl">
             <p className="black text-lg">عدد الدروس :</p>
             <p className="gradient-text text-lg">
-              {courseInfo.course?.total_lessons}
+              {courseInfo.length !== 0 &&
+                countTotalLessons(courseInfo.sections)}
             </p>
           </div>
         </div>

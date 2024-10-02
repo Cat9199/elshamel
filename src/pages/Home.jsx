@@ -17,6 +17,7 @@ import AcademicSec from "../components/sections/AcademicSec";
 import QandA from "../components/sections/QandA";
 import AddTeacherSec from "../components/sections/AddTeacherSec";
 import Cookies from "js-cookie";
+import LiveNow from "../components/sections/LiveNow";
 
 const Home = () => {
   console.log(Cookies.get("token"));
@@ -67,6 +68,8 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <LiveNow />
+
       <FeaturesSec />
       <CoursesSec />
       <QandA />

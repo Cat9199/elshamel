@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaUniversity } from "react-icons/fa";
+import { FaLock, FaUniversity } from "react-icons/fa";
 import { PiStudentLight } from "react-icons/pi";
 
 import { IoIosArrowBack } from "react-icons/io";
@@ -132,7 +132,11 @@ export default function CoursesSec({ user, page }) {
                       </div>
                       <div className="flex justify-between items-center">
                         <p className="text-slate-600 text-2xl font-semibold">
-                          {course.price} ج م
+                          {course.price === 2 ? (
+                            <FaLock />
+                          ) : (
+                            `${course.price} ج م`
+                          )}
                         </p>
 
                         {userCoursesIds.includes(course.id) ? (
@@ -215,7 +219,11 @@ export default function CoursesSec({ user, page }) {
                           </div>
                           <div className="flex justify-between items-center">
                             <p className="text-slate-600 text-2xl font-semibold">
-                              {course.price} ج م
+                              {course.price === 2 ? (
+                                <FaLock />
+                              ) : (
+                                `${course.price} ج م`
+                              )}
                             </p>
 
                             {userCoursesIds.includes(course.id) ? (
