@@ -30,6 +30,7 @@ const Accordion = ({ title, lessons, setVid, setVidName }) => {
               onClick={() => {
                 setVid(lesson.embed);
                 setVidName(lesson.title);
+                window.scrollTo({ top: 0, behavior: "smooth" });
               }}
               className=" cursor-pointer bg-white hover:bg-blue-300 p-4"
             >

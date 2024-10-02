@@ -61,6 +61,10 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        flash: {
+          "0%, 100%": { opacity: 1 },
+          "50%": { opacity: 0 },
+        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -81,6 +85,7 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
         topToBottom: "topToBottom 2.5s ease-in-out infinite",
         bottomToTop: "bottomToTop 2.5s ease-in-out infinite",
+        flash: "flash 1.5s ease-in-out infinite",
       },
       dropShadow: {
         blob: "4px 4px 0 rgba(0, 0, 0, 0.25)",
@@ -117,6 +122,10 @@ const config = {
         ".gradient": {
           background:
             "linear-gradient(148deg, rgba(125, 176, 247, 1) 0%, rgba(19, 56, 212, 1) 100%)",
+        },
+        ".gradient-red": {
+          background:
+            "linear-gradient(148deg, rgba(247, 125, 125, 1) 0%, rgba(212, 19, 19, 1) 100%)",
         },
         ".main-input": {
           display: "flex",
