@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 // import logo from "../assets/logo.png";
 import { IoIosArrowBack } from "react-icons/io";
 import { PiStudentLight } from "react-icons/pi";
-import { FaUniversity } from "react-icons/fa";
+import { FaLock, FaUniversity } from "react-icons/fa";
 import { IoChatbubblesOutline } from "react-icons/io5";
 import { FaRegShareFromSquare } from "react-icons/fa6";
 import { toast, Toaster } from "sonner";
@@ -112,7 +112,11 @@ export default function Teacher() {
                         </div>
                         <div className="flex justify-between items-center">
                           <p className="text-slate-600 text-2xl font-semibold">
-                            {course.price} ج م
+                            {course.price === 2 ? (
+                              <FaLock />
+                            ) : (
+                              `${course.price} ج م`
+                            )}{" "}
                           </p>
                           <Link
                             to={`/course/${course.id}`}
