@@ -17,33 +17,8 @@ export default function AcademicSec() {
           >
             <img src={academic} alt="" className="w-full h-full object-cover" />
           </Link>
-          <Link
-            to={"/teacher/60"}
-            className="bg-white rounded-3xl py-2 px-10 flex flex-col items-center justify-center gap-4  w-60 max-md:w-full"
-          >
-            <img
-              src={academic2}
-              alt=""
-              className="w-full h-full object-cover"
-            />
-          </Link>
-          <Link
-            to={"/teacher/59"}
-            className="bg-white rounded-3xl py-2 px-10 flex flex-col items-center justify-center gap-4  w-60 max-md:w-full"
-          >
-            <img
-              src={academic3}
-              alt=""
-              className="w-full h-full object-cover"
-            />
-          </Link>
-          {/* <div className="bg-white rounded-3xl py-8 px-10 flex flex-col items-center justify-center gap-4  w-52 max-md:w-full">
-            <img src={lib} alt="" className="w-20" />
 
-            <h1 className="text-slate-700 text-xl font-bold">
-              مكتبة اليكترونية
-            </h1>
-          </div> */}
+
         </div>
       </div>
     </div>
