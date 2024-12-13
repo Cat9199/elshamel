@@ -68,7 +68,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <LiveNow />
+      
 
       <FeaturesSec />
       <CoursesSec />
